@@ -1,0 +1,221 @@
+<!-DOCTYPE HTML-->
+<html>
+<head>
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" type="text/css"/>
+<link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" type="text/css"  />
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" type="text/css" />
+<script type="text/javascript" src="js/jquery-2.2.0.min.js" ></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js" ></script>
+
+
+<script type="text/javascript">
+document.addEventListener("deviceready", function (){
+
+
+
+
+	$("#btnGuardar").tap(function (){
+	   var id=$("#txtId").val();
+	   var noms=$("#txtNS").val();
+	   var apep=$("#txtAP").val();
+	   var apem=$("#txtAM").val();
+	   var edd=$("#txtED").val();
+	   var sex=$("#txtSX").val();
+	   var sems=$("#txtSM").val();
+	   var espc=$("#txtESP").val();
+
+
+		$.ajax({
+			type: "POST",
+			url:"http://angelmovil.esy.es/guardar.php",
+			data:"ID="+id+"&NOMES="+noms+"&APP="+apep+"&APM="+apem+"&ED="+edd +"&SX="+sex +"&SM="+sems +"&ESP="+espc,
+			success: function (datos){
+				alert(datos);
+			}
+		});
+
+	});
+
+
+
+
+		$("#btnConsultar").tap(function (){	
+			
+		$.ajax({
+			type:"POST",
+			url:"http://angelmovil.esy.es/consultarTodo.php",
+			data:"",
+			success: function (data){
+			alert("listo si junciona"+data);
+				var reg=$.parseJSON(data);
+				var datos=$("#resConsulta");
+				datos.html('<table border="1" width="100" id="tbl1"><th>Id</th><th>Nombre</th><th>ApellidoPaterno</th><th>ApellidoMaterno</th><th>Edad</th><th>Sexo</th><th>Semestre</th><th>Especialidad</th>');
+				var fila=$("#tbl1");
+				for(var i in reg){
+					fila.append('<tr><td>'+reg[i].id_Alumno+'</td><td>'+reg[i].Nombres+'</td><td>'+reg[i].Apellido_Paterno+'</td><td>'+reg[i].Apellido_Materno+'</td><td>'+reg[i].Edad+'</td><td>'+reg[i].Sexo+'</td><td>'+reg[i].Semestre+'</td><td>'+reg[i].Especialidad+'</td></tr>');
+				}
+				fila.append('</table>');
+			}
+		});
+	});
+
+
+
+		$("#btnConsultarID").tap(function (){
+                    
+		var id=$("#txtIDConsult").val();
+		$.ajax({
+			type:"POST",
+			url:"http://angelmovil.esy.es/consultaID.php",
+			data:"ID="+id,
+			success:function(respuesta){
+				var reg=$.parseJSON(respuesta);
+                                var datos=$("#resConsultaID");
+				datos.html('<table border="1" width="100" id="tbl2"><th>Id</th><th>Nombre</th><th>ApellidoPaterno</th><th>ApellidoMaterno</th><th>Edad</th><th>Sexo</th><th>Semestre</th><th>Especialidad</th>');
+				var fila=$("#tbl2");
+				for(var i in reg){
+					fila.append('<tr><td>'+reg[i].id_Alumno+'</td><td>'+reg[i].Nombres+'</td><td>'+reg[i].Apellido_Paterno+'</td><td>'+reg[i].Apellido_Materno+'</td><td>'+reg[i].Edad+'</td><td>'+reg[i].Sexo+'</td><td>'+reg[i].Semestre+'</td><td>'+reg[i].Especialidad+'</td></tr>');
+				}
+				fila.append('</table>');
+			}
+
+		});
+
+	});
+	
+	
+       /* 
+        $("#btnEliminarse").tap(function (){
+                    
+		var id=$("#txtElimina").val();
+		alert(id);
+		$.ajax({
+			type:"POST",
+			url:"http://angelmovil.esy.es/Eliminar.php",
+			data:"ID="+id,
+			success:function(respuesta){
+				var reg=$.parseJSON(respuesta);
+                var datos=$("#resConsultaID");
+				datos.html('<table border="1" width="100" id="tbl3"><th>Id</th><th>Nombre</th><th>ApellidoPaterno</th><th>ApellidoMaterno</th><th>Edad</th><th>Sexo</th><th>Semestre</th><th>Especialidad</th>');
+				var fila=$("#tbl3");
+				for(var i in reg){
+					fila.append('<tr><td>'+reg[i].id_Alumno+'</td><td>'+reg[i].Nombres+'</td><td>'+reg[i].Apellido_Paterno+'</td><td>'+reg[i].Apellido_Materno+'</td><td>'+reg[i].Edad+'</td><td>'+reg[i].Sexo+'</td><td>'+reg[i].Semestre+'</td><td>'+reg[i].Especialidad+'</td></tr>');
+				}
+				fila.append('</table>');
+			}
+
+		});
+
+	});*/
+        
+        
+        
+       
+
+
+
+
+}, false);
+</script>
+</head>
+
+
+
+<body>
+<div data-role="page" id="menu" data-theme="b">
+	<div data-role="header" >
+		<p>Pagina Inicial</p>
+	</div>
+	<div data-role="content">
+		<a href="#registro" data-role="button" data-transition="flip">Registro de alumnos</a>
+		<a href="#informacion" data-role="button" data-transition="flip">informacion completa de alumnos</a>
+		<a href="#informacionID" data-role="button" data-transition="flip">informacion por alumno</a>
+		<a href="#EliminarRe" data-role="button" data-transition="flip">Eliminar un Registro</a>
+	</div>
+	<div data-role="footer">
+		<p>pie de página</p>
+	</div>
+</div>
+
+
+<div data-role="page" id="registro">
+	<div data-role="header">
+		<a href="#menu" data-role="button" data-transition="slidedown">Atras</a>
+		<h1>Sistema de Registro de datos</h1>
+	</div>
+	<div data-role="content">
+	   <input type="text" id="txtId" placeholder="Matricula nueva" />
+	   <input type="text" id="txtNS" placeholder="Nombre/s" />
+	   <input type="text" id="txtAP" placeholder="Apellido Paterno" />
+	   <input type="text" id="txtAM" placeholder="Apellido Materno" />
+	   <input type="text" id="txtED" placeholder="Edad" />
+	   <input type="text" id="txtSX" placeholder="Sexo" />
+	   <input type="text" id="txtSM" placeholder="Semestre" />
+	   <input type="text" id="txtESP" placeholder="Especialidad" />
+
+
+	   <input type="button" id="btnGuardar" value="Guardar datos" />
+	</div>
+	<div data-role="footer">
+     		<p>ingrese todos los campos</p>
+	</div>
+</div>
+
+
+<div data-role="page" id="informacion" data-theme="a">
+	<div data-role="header" >
+		<p>Consultar Todos los Alumnos</p>
+	</div>
+	<div data-role="content">
+		<input type="button" value="Consultar base de datos" id="btnConsultar"/>
+		<div id="resConsulta" >
+		</div>
+	</div>
+	<div data-role="footer">
+		<p>gracias por su atencion</p>
+
+	</div>
+</div>
+
+
+<div data-role="page" id="informacionID" data-theme="a">
+	<div data-role="header" >
+		<p>Consultar Alumnos Especificos</p>
+	</div>
+	<div data-role="content">
+		<input type="text" id ="txtIDConsult" placeholder="Escribe el ID del producto"/>
+		<input type="button" value="Consultar base por identificador" id="btnConsultarID"/>
+		<div id="resConsultaID" >
+		</div>
+	</div>
+	<div data-role="footer">
+		<p>gracias por su atencion</p>
+
+	</div>
+</div>
+
+
+/*
+
+<div data-role="page" id="EliminarRe" data-theme="a">
+	<div data-role="header" >
+		<p>Eliminar_Un_Registro</p>
+	</div>
+	<div data-role="content">
+		<input type="text" id ="txtElimina" placeholder="Escribe la Matricula del alumno"/>
+		<input type="button" value="Eliminar registro" id="btnEliminarse"/>
+		<div id="resEliminar" >
+		</div>
+	</div>
+	<div data-role="footer">
+		<p>gracias por su atencion</p>
+
+	</div>
+</div>
+
+*/
+
+
+
+</body>
+</html>
