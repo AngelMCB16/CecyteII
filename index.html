@@ -47,7 +47,7 @@ document.addEventListener("deviceready", function (){
 			url:"http://angelmovil.esy.es/consultarTodo.php",
 			data:"",
 			success: function (data){
-			alert("listo si junciona"+data);
+			
 				var reg=$.parseJSON(data);
 				var datos=$("#resConsulta");
 				datos.html('<table border="1" width="100" id="tbl1"><th>Id</th><th>Nombre</th><th>ApellidoPaterno</th><th>ApellidoMaterno</th><th>Edad</th><th>Sexo</th><th>Semestre</th><th>Especialidad</th>');
