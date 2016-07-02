@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" type="text/css"/>
 <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" type="text/css"  />
 <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" type="text/css" />
+<script src="cordova.js" ></script>
 <script type="text/javascript" src="js/jquery-2.2.0.min.js" ></script>
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js" ></script>
 
@@ -39,8 +40,8 @@ document.addEventListener("deviceready", function (){
 
 
 
-		$("#btnConsultar").tap(function (){	
-			
+		$("#btnConsultar").tap(function (){
+
 		$.ajax({
 			type:"POST",
 			url:"http://angelmovil.esy.es/consultarTodo.php",
@@ -62,7 +63,7 @@ document.addEventListener("deviceready", function (){
 
 
 		$("#btnConsultarID").tap(function (){
-                    
+
 		var id=$("#txtIDConsult").val();
 		$.ajax({
 			type:"POST",
@@ -82,11 +83,11 @@ document.addEventListener("deviceready", function (){
 		});
 
 	});
-	
-	
-       /* 
+
+
+       /*
         $("#btnEliminarse").tap(function (){
-                    
+
 		var id=$("#txtElimina").val();
 		alert(id);
 		$.ajax({
@@ -107,10 +108,10 @@ document.addEventListener("deviceready", function (){
 		});
 
 	});*/
-        
-        
-        
-       
+
+
+
+
 
 
 
@@ -195,7 +196,6 @@ document.addEventListener("deviceready", function (){
 </div>
 
 
-/*
 
 <div data-role="page" id="EliminarRe" data-theme="a">
 	<div data-role="header" >
@@ -213,7 +213,6 @@ document.addEventListener("deviceready", function (){
 	</div>
 </div>
 
-*/
 
 
 
